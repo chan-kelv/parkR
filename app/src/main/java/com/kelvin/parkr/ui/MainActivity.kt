@@ -1,7 +1,8 @@
-package com.kelvin.parkr
+package com.kelvin.parkr.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.kelvin.parkr.R
 
 class MainActivity : AppCompatActivity() {
 

@@ -45,12 +45,6 @@ dependencies {
     // ===== Leak Canary ======
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
 
-    // ===== KtLint =====
-    ktlint "com.pinterest:ktlint:0.34.2"
-    // additional 3rd party ruleset(s) can be specified here
-    // just add them to the classpath (ktlint 'groupId:artifactId:version') and
-    // ktlint will pick them up
-
     // ===== Rx ======
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
@@ -60,31 +54,4 @@ dependencies {
 
     // ===== Date and Time backport ======
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
-
-}
-
-/**
- * check code style (it's also bound to "gradle check")
- * $ gradle ktlint
- */
-task ktlint(type: JavaExec, group: "verification") {
-    description = "Check Kotlin code style."
-    main = "com.pinterest.ktlint.Main"
-    classpath = configurations.ktlint
-    args "src/**/*.kt"
-    // to generate report in checkstyle format prepend following args:
-    // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
-    // see https://github.com/pinterest/ktlint#usage for more
-}
-check.dependsOn ktlint
-
-/**
- * fix code style deviations (runs built-in formatter)
- * $ gradle ktlintFormat
- */
-task ktlintFormat(type: JavaExec, group: "formatting") {
-    description = "Fix Kotlin code style deviations."
-    main = "com.pinterest.ktlint.Main"
-    classpath = configurations.ktlint
-    args "-F", "src/**/*.kt"
 }
