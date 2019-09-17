@@ -22,6 +22,16 @@ android {
     }
 }
 
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+configurations {
+    ktlint
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -31,4 +41,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // ===== Leak Canary ======
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
+
+    // ===== Rx ======
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
+
+    // ===== Timber Logging =====
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // ===== Date and Time backport ======
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 }
