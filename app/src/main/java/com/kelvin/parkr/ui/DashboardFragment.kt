@@ -12,7 +12,7 @@ import com.kelvin.parkr.ui.adapter.DashboardPagerAdapter
 import com.kelvin.parkr.viewModel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
-class DashboardFragment: BaseFragment() {
+class DashboardFragment : BaseFragment() {
     private lateinit var dashboardVm: DashboardViewModel
     private lateinit var dashboardPagerAdapter: DashboardPagerAdapter
 
@@ -20,23 +20,28 @@ class DashboardFragment: BaseFragment() {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
         dashboardVm = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        dashboardVm.getDashboardFragmets().observe(this, dashboardRefreshObserver)
+        dashboardVm.getDashboardFragments().observe(this, dashboardRefreshObserver)
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // setup view pager
         setupParkPagerAdapter()
         setupParkTabs()
-        setupParkFragments()
+
+        addParkFragments()
     }
 
-    private fun setupParkFragments() {
-        dashboardVm.addPagerFragments(mutableListOf(
-            ParkNowFragment(),
-            ParkingInProgressFragment()
-        ))
+    private fun addParkFragments() {
+        dashboardVm.addPagerFragments(
+            mutableListOf(
+                ParkNowFragment(),
+                ParkingInProgressFragment()
+            )
+        )
     }
 
     /*
@@ -57,12 +62,12 @@ class DashboardFragment: BaseFragment() {
     /*
      * Observers changes to the list of dashboard fragments and refreshes the view and tabs
      */
-    private val dashboardRefreshObserver : Observer<MutableList<BasePagerFragment>?> = Observer {
+    private val dashboardRefreshObserver: Observer<MutableList<BasePagerFragment>?> = Observer {
         if (!it.isNullOrEmpty()) {
             dashboardPagerAdapter.refreshPagerFragments(it)
 
             // Set tab icons
-            dashboardVm.getDashboardFragmets().value?.let { dashboardFragments ->
+            dashboardVm.getDashboardFragments().value?.let { dashboardFragments ->
                 for (index in 0 until dashboardFragments.size) {
                     dashboardFragments[index].tabIconRes?.let { iconRes ->
                         activity?.runOnUiThread {

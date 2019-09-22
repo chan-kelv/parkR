@@ -4,16 +4,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.kelvin.parkr.ui.BasePagerFragment
-import com.kelvin.parkr.ui.ParkNowFragment
-import com.kelvin.parkr.ui.ParkingInProgressFragment
 
 class DashboardPagerAdapter(fragmentManager: FragmentManager) :
     FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    private var fragments =  listOf(
-        ParkNowFragment(),
-        ParkingInProgressFragment()
-    )
+    private var fragments =  listOf<BasePagerFragment>()
 
     override fun getItem(position: Int): Fragment {
         return fragments[position]
