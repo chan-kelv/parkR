@@ -60,15 +60,22 @@ dependencies {
     // ===== Date and Time backport ======
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
+    // ===== Google Play Services location ======
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
     // ===== Room ======
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
-    // optional - Kotlin Extensions and Coroutines support for Room
+    // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
-    // optional - RxJava support for Room
+    // RxJava support for Room
     implementation "androidx.room:room-rxjava2:$room_version"
-    // Test helpers
+    // Test helpers for Room
     testImplementation "androidx.room:room-testing:$room_version"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+
+    // ===== Gson ======
+    implementation 'com.google.code.gson:gson:2.8.5'
 
 }

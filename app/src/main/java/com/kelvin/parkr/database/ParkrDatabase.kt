@@ -4,12 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.kelvin.parkr.model.Parking
 import com.kelvin.parkr.model.Vehicle
 
-@Database(entities = [Vehicle::class], version = 1)
+@Database(entities = [Vehicle::class, Parking::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class ParkrDatabase : RoomDatabase() {
 
     abstract fun vehicleDao(): VehicleDao
+    abstract fun parkingDao(): ParkingDao
 
     companion object {
         private var INSTANCE: ParkrDatabase? = null
