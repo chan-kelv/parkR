@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.kelvin.parkr.R
 
-class ParkNowFragment : BasePagerFragment("Park Now") {
+class ParkNowFragment : BasePagerFragment("Park Now", R.drawable.ic_car) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return layoutInflater.inflate(R.layout.fragment_park_now, container, false)
     }
