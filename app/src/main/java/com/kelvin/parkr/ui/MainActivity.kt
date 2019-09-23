@@ -20,6 +20,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupToolbar() {
-
+        // TODO in #18
     }
 }
