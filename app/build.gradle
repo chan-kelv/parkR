@@ -22,6 +22,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 allprojects {
@@ -54,10 +57,18 @@ dependencies {
     // ===== Live Data and View Models ======
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    testImplementation "android.arch.core:core-testing:$lifecycle_version"
 
     // ===== Timber Logging =====
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // ===== Date and Time backport ======
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+
+    // ===== Robolectric =====
+    // Optional -- Robolectric environment
+    testImplementation 'androidx.test:core:1.2.0'
+
+    // ===== Mockito ======
+    testImplementation 'org.mockito:mockito-core:2.13.0'
 }

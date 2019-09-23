@@ -62,8 +62,8 @@ class DashboardFragment : BaseFragment() {
     /*
      * Observers changes to the list of dashboard fragments and refreshes the view and tabs
      */
-    private val dashboardRefreshObserver: Observer<MutableList<BasePagerFragment>?> = Observer {
-        if (!it.isNullOrEmpty()) {
+    private val dashboardRefreshObserver: Observer<MutableList<BasePagerFragment>> = Observer {
+        if (it.isNotEmpty()) {
             dashboardPagerAdapter.refreshPagerFragments(it)
 
             // Set tab icons

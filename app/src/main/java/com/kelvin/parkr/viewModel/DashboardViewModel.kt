@@ -8,9 +8,9 @@ import com.kelvin.parkr.ui.BasePagerFragment
  * Created by Kelvin Chan on 2019-09-22.
  */
 class DashboardViewModel: BaseViewModel() {
-    private var dashboardFragmentsVm: MutableLiveData<MutableList<BasePagerFragment>> = MutableLiveData()
+    private var dashboardFragmentsVm: MutableLiveData<MutableList<BasePagerFragment>> = MutableLiveData(mutableListOf())
 
-    fun getDashboardFragments(): LiveData<MutableList<BasePagerFragment>?> {
+    fun getDashboardFragments(): LiveData<MutableList<BasePagerFragment>> {
         return dashboardFragmentsVm
     }
 
@@ -26,7 +26,7 @@ class DashboardViewModel: BaseViewModel() {
         dashboardFragmentsVm.notifyObserver()
     }
 
-    fun addPagerFragments(fragments: MutableList<BasePagerFragment>?) {
+    fun addPagerFragments(fragments: MutableList<BasePagerFragment>) {
         dashboardFragmentsVm.value = fragments
     }
 }
