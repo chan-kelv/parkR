@@ -30,7 +30,7 @@ class ParkrDatabaseTest {
         vehicle = firstVehicle,
         latLng = LatLng(493.9, 312.33),
         timeStarted = null,
-        durationPaid = null,
+        durationPaidMs = null,
         stallNumber = 312,
         level = 2,
         lotPhoneNumber = "604-123-4567",
@@ -40,9 +40,19 @@ class ParkrDatabaseTest {
         vehicle = secondVehicle,
         latLng = LatLng(-100.9, 312.33),
         timeStarted = Date(888888),
-        durationPaid = 600000,
+        durationPaidMs = 600000,
         stallNumber = null,
         level = null,
+        lotPhoneNumber = null,
+        notes = null
+    )
+    private val thirdParking = Parking(
+        vehicle = secondVehicle,
+        latLng = LatLng(212.9, 31.33),
+        timeStarted = null,
+        durationPaidMs = 600000,
+        stallNumber = 21,
+        level = 4,
         lotPhoneNumber = null,
         notes = null
     )
@@ -61,15 +71,9 @@ class ParkrDatabaseTest {
     }
 
     @Test
-    fun testVehicleDaoQueries() = runBlocking {
+    fun testVehicleDao_insertVehicle_sizeUpdate() = runBlocking {
         vehicleDao.insertVehicle(firstVehicle)
         vehicleDao.insertVehicle(secondVehicle)
-
-        val firstVehicleFromDb = vehicleDao.findVehicleByLicensePlate(firstVehicle.licensePlate)
-        Assert.assertEquals(firstVehicle, firstVehicleFromDb[0])
-
-        val secondVehicleFromDb = vehicleDao.findVehicleByLicensePlate(secondVehicle.licensePlate)
-        Assert.assertEquals(secondVehicle, secondVehicleFromDb[0])
 
         val allVehiclesFromDb = vehicleDao.loadAllVehicles()
         Assert.assertTrue(allVehiclesFromDb.size == 2)
@@ -79,15 +83,42 @@ class ParkrDatabaseTest {
     }
 
     @Test
-    fun testParkingDaoQueries() = runBlocking {
-        val firstParkingId = parkingDao.insertParking(firstParking)
-        parkingDao.insertParking(secondParking)
+    fun testVehicleDao_findVehicleByLicense_findSuccess() = runBlocking {
+        vehicleDao.insertVehicle(firstVehicle)
+        vehicleDao.insertVehicle(secondVehicle)
+        val firstVehicleFromDb = vehicleDao.findVehicleByLicensePlate(firstVehicle.licensePlate)
+        Assert.assertEquals(firstVehicle, firstVehicleFromDb[0])
 
-        val firstParkingFromDb = parkingDao.findParkingById(firstParkingId)
-        Assert.assertEquals(firstParking, firstParkingFromDb[0])
+        val secondVehicleFromDb = vehicleDao.findVehicleByLicensePlate(secondVehicle.licensePlate)
+        Assert.assertEquals(secondVehicle, secondVehicleFromDb[0])
+    }
+
+    @Test
+    fun testVehicleDao_deleteVehicle_vehicleGoneAndSizeDecrease() = runBlocking {
+        vehicleDao.insertVehicle(firstVehicle)
+        vehicleDao.insertVehicle(secondVehicle)
+        vehicleDao.deleteVehicle(firstVehicle)
+        Assert.assertTrue(vehicleDao.findVehicleByLicensePlate(firstVehicle.licensePlate).isEmpty())
+        val allVehiclesFromDb = vehicleDao.loadAllVehicles()
+        Assert.assertTrue(allVehiclesFromDb.size == 1)
+    }
+
+    @Test
+    fun testParkingDao_insertParking_sizeUpdate() = runBlocking {
+        parkingDao.insertParking(firstParking)
+        parkingDao.insertParking(secondParking)
 
         val allParkingFromDb = parkingDao.loadAllParking()
 
         Assert.assertTrue(allParkingFromDb.size == 2)
+    }
+
+    @Test
+    fun testParkingDao_findParkingById_findSuccess() = runBlocking {
+        val thirdParkingId = parkingDao.insertParking(thirdParking)
+        parkingDao.insertParking(secondParking)
+
+        val thirdParkingFromDb = parkingDao.findParkingById(thirdParkingId)
+        Assert.assertEquals(thirdParking, thirdParkingFromDb[0])
     }
 }

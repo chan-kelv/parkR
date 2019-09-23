@@ -10,7 +10,7 @@ data class Parking(
     var vehicle: Vehicle,
     var latLng: LatLng,
     var timeStarted: Date?,
-    var durationPaid: Long?,
+    var durationPaidMs: Long?,
     var stallNumber: Int?,
     var level: Int?,
     var lotPhoneNumber: String?,
