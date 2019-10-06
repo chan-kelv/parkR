@@ -26,7 +26,7 @@ class DashboardViewModel: BaseViewModel() {
         dashboardFragmentsVm.notifyObserver()
     }
 
-    fun addPagerFragments(fragments: MutableList<BasePagerFragment>) {
+    fun setPagerFragments(fragments: MutableList<BasePagerFragment>) {
         dashboardFragmentsVm.value = fragments
     }
 }

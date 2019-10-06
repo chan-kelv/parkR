@@ -5,17 +5,21 @@
                                                    android:layout_height="match_parent"
                                                    android:orientation="vertical">
     <androidx.viewpager.widget.ViewPager
-            android:id="@+id/pager_dashboard" app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/pager_dashboard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/tab_dashboard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_height="0dp"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintBottom_toTopOf="@+id/tab_dashboard"
-            android:layout_width="0dp"/>
+            app:layout_constraintTop_toTopOf="parent"/>
     <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_dashboard"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pager_dashboard"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            android:layout_height="wrap_content" android:layout_width="0dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pager_dashboard"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

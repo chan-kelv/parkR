@@ -52,7 +52,7 @@ class DashboardVMTest {
         dashboardVm.addPagerFragment(mockFrag3)
         Assert.assertEquals(3, dashboardVm.getDashboardFragments().value?.size)
 
-        dashboardVm.addPagerFragments(mutableListOf())
+        dashboardVm.setPagerFragments(mutableListOf())
         Assert.assertEquals(0, dashboardVm.getDashboardFragments().value?.size)
     }
 }

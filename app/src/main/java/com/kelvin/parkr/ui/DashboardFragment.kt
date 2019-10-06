@@ -34,7 +34,7 @@ class DashboardFragment : BaseFragment() {
     }
 
     private fun addParkFragments() {
-        dashboardVm.addPagerFragments(
+        dashboardVm.setPagerFragments(
             mutableListOf(
                 ParkNowFragment(),
                 ParkingInProgressFragment()
