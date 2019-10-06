@@ -17,12 +17,10 @@ class DashboardFragment : BaseFragment() {
     private lateinit var dashboardPagerAdapter: DashboardPagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
-
         dashboardVm = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
         dashboardVm.getDashboardFragments().observe(this, dashboardRefreshObserver)
 
-        return view
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,8 +46,7 @@ class DashboardFragment : BaseFragment() {
      * Creates a dashboard pager adapter and set it to the view pager
      */
     private fun setupParkPagerAdapter() {
-        dashboardPagerAdapter = DashboardPagerAdapter(childFragmentManager)
-        pager_dashboard.adapter = dashboardPagerAdapter
+        pager_dashboard.adapter = DashboardPagerAdapter(childFragmentManager)
     }
 
     /*
